@@ -14,6 +14,7 @@ final class CountryFormViewModel: LoadableViewModel {
     var state: LoadState<[Country]> = .idle
 
     var name = ""
+    var birthDate: Date?
     var region: String?
     var country: Country?
 

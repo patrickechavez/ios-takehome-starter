@@ -50,6 +50,12 @@ struct CountryFormView: View {
                     capitalization: .words
                 )
 
+                DateField(
+                    label: "Birth date",
+                    date: $viewModel.birthDate,
+                    range: Date.distantPast...Date()
+                )
+
                 PickerField(
                     label: "Region",
                     placeholder: "Select your region",
