@@ -17,7 +17,7 @@ extension APIClient {
     }
 }
 
-struct LiveAPIClient: APIClient {
+struct URLSessionAPIClient: APIClient {
 
     private let baseURL: URL
     private let session: URLSession

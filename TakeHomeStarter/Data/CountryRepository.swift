@@ -10,11 +10,11 @@ protocol CountryRepository: Sendable {
     func countries() async throws -> [Country]
 }
 
-struct LiveCountryRepository: CountryRepository {
+struct RemoteCountryRepository: CountryRepository {
 
-    private let api: any APIClient
+    private let api: APIClient
 
-    init(api: any APIClient) {
+    init(api: APIClient) {
         self.api = api
     }
 
