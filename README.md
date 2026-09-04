@@ -25,7 +25,9 @@ Reset first and it fails with "working tree has uncommitted changes".
 
 Then:
 
-1. Point `APIConfig.baseURL` at whatever API the brief gives you.
+1. Set `API_BASE_URL` in `Config/Development.xcconfig` (and Staging/Production)
+   to whatever API the brief gives you. Escape the `//` as `https:/$()/example.com`
+   — an unescaped `//` starts a comment in xcconfig and the URL silently breaks.
 2. Delete `TakeHomeStarter/Features/Example/` and the matching test file.
 3. Build your screen.
 
