@@ -17,19 +17,11 @@ final class CountryFormViewModel: LoadableViewModel {
     var region: String?
     var country: Country?
 
-    private(set) var submitted: Submission?
-
-    struct Submission: Hashable {
-        let name: String
-        let region: String
-        let country: String
-    }
-
     private var didAttemptSubmit = false
 
-    @ObservationIgnored private let repository: any CountryRepository
+    @ObservationIgnored private let repository: CountryRepository
 
-    init(repository: any CountryRepository) {
+    init(repository: CountryRepository) {
         self.repository = repository
     }
 
@@ -43,9 +35,7 @@ final class CountryFormViewModel: LoadableViewModel {
         return countries.filter { $0.region == region }
     }
 
-    var nameError: String? {
-        guard didAttemptSubmit else { return nil }
-
+    private var nameValidationMessage: String? {
         let trimmed = name.trimmingCharacters(in: .whitespaces)
         if trimmed.isEmpty { return "Name is required." }
 
@@ -54,6 +44,11 @@ final class CountryFormViewModel: LoadableViewModel {
             return "Cannot contain numbers or special characters."
         }
         return nil
+    }
+
+    var nameError: String? {
+        guard didAttemptSubmit else { return nil }
+        return nameValidationMessage
     }
 
     var regionError: String? {
@@ -67,8 +62,7 @@ final class CountryFormViewModel: LoadableViewModel {
     }
 
     var isValid: Bool {
-        nameError == nil && region != nil && country != nil
-            && !name.trimmingCharacters(in: .whitespaces).isEmpty
+        nameValidationMessage == nil && region != nil && country != nil
     }
 
     func load() async {
@@ -77,12 +71,12 @@ final class CountryFormViewModel: LoadableViewModel {
         }
     }
 
-    func submit() {
+    func submit() -> (name: String, region: String, country: String)? {
         didAttemptSubmit = true
 
-        guard isValid, let region, let country else { return }
+        guard isValid, let region, let country else { return nil }
 
-        submitted = Submission(
+        return (
             name: name.trimmingCharacters(in: .whitespaces),
             region: region,
             country: country.name
@@ -93,7 +87,6 @@ final class CountryFormViewModel: LoadableViewModel {
         name = ""
         region = nil
         country = nil
-        submitted = nil
         didAttemptSubmit = false
     }
 

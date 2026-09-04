@@ -9,7 +9,7 @@ import SwiftUI
 @main
 struct TakeHomeStarterApp: App {
 
-    @State private var dependencies = AppDependencies()
+    @State private var dependencies = AppDependencies.live()
 
     var body: some Scene {
         WindowGroup {

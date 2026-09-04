@@ -20,9 +20,13 @@ struct RootView: View {
             )
             .navigationDestination(for: Route.self) { route in
                 switch route {
-                case .first:
+                case let .first(name, region, country):
                     FirstScreen(
-                        viewModel: dependencies.makeFirstScreenViewModel(),
+                        viewModel: dependencies.makeFirstScreenViewModel(
+                            name: name,
+                            region: region,
+                            country: country
+                        ),
                         path: $path
                     )
 

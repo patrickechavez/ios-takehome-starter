@@ -9,18 +9,26 @@ import Foundation
 @MainActor
 final class AppDependencies {
 
-    let api: any APIClient
+    private let countryRepository: CountryRepository
 
-    init(api: any APIClient = LiveAPIClient()) {
-        self.api = api
+    init(countryRepository: CountryRepository) {
+        self.countryRepository = countryRepository
+    }
+
+    static func live() -> AppDependencies {
+        AppDependencies(countryRepository: RemoteCountryRepository(api: URLSessionAPIClient()))
     }
 
     func makeCountryFormViewModel() -> CountryFormViewModel {
-        CountryFormViewModel(repository: LiveCountryRepository(api: api))
+        CountryFormViewModel(repository: countryRepository)
     }
 
-    func makeFirstScreenViewModel() -> FirstScreenViewModel {
-        FirstScreenViewModel()
+    func makeFirstScreenViewModel(
+        name: String,
+        region: String,
+        country: String
+    ) -> FirstScreenViewModel {
+        FirstScreenViewModel(name: name, region: region, country: country)
     }
 
     func makeSecondScreenViewModel() -> SecondScreenViewModel {

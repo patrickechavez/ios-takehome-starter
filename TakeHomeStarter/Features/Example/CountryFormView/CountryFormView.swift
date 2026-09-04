@@ -36,10 +36,6 @@ struct CountryFormView: View {
             guard viewModel.state.needsLoad else { return }
             await viewModel.load()
         }
-        .onChange(of: viewModel.submitted) { _, submission in
-            guard submission != nil else { return }
-            path.append(.first)
-        }
     }
 
     private var form: some View {
@@ -60,7 +56,8 @@ struct CountryFormView: View {
                     items: viewModel.regions,
                     selection: $viewModel.region,
                     title: { $0 },
-                    error: viewModel.regionError
+                    error: viewModel.regionError,
+                    isRequired: true
                 )
                 .onChange(of: viewModel.region) { _, _ in
                     viewModel.regionChanged()
@@ -73,16 +70,23 @@ struct CountryFormView: View {
                     selection: $viewModel.country,
                     title: \.name,
                     error: viewModel.countryError,
+                    isRequired: true,
                     isEnabled: viewModel.region != nil
                 )
 
                 HStack(spacing: Theme.Spacing.md) {
                     Button {
-                        viewModel.submit()
+                        guard let result = viewModel.submit() else { return }
+                        path.append(.first(
+                            name: result.name,
+                            region: result.region,
+                            country: result.country
+                        ))
                     } label: {
                         Text("Submit").frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
+                    .disabled(!viewModel.isValid)
 
                     Button {
                         viewModel.clear()

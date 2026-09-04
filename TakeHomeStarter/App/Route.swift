@@ -7,6 +7,6 @@
 import Foundation
 
 enum Route: Hashable {
-    case first
+    case first(name: String, region: String, country: String)
     case second
 }

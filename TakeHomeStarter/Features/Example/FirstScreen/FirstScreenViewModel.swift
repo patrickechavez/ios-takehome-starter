@@ -11,6 +11,21 @@ import Observation
 @MainActor
 final class FirstScreenViewModel {
 
-    let title = "First Screen"
-    let message = "Pushed onto the stack after the form was submitted."
+    let name: String
+    let region: String
+    let country: String
+
+    init(name: String, region: String, country: String) {
+        self.name = name
+        self.region = region
+        self.country = country
+    }
+
+    var greeting: String {
+        "Hi \(name)"
+    }
+
+    var origin: String {
+        "You are from \(region), \(country)"
+    }
 }

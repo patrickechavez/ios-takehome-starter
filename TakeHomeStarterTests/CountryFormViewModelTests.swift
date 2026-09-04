@@ -54,7 +54,7 @@ struct CountryFormViewModelTests {
 
     @Test func emptyNameIsRejected() async {
         let viewModel = await makeViewModel()
-        viewModel.submit()
+        _ = viewModel.submit()
 
         #expect(viewModel.nameError == "Name is required.")
     }
@@ -62,7 +62,7 @@ struct CountryFormViewModelTests {
     @Test func nameWithNumbersIsRejected() async {
         let viewModel = await makeViewModel()
         viewModel.name = "Andre 3000"
-        viewModel.submit()
+        _ = viewModel.submit()
 
         #expect(viewModel.nameError == "Cannot contain numbers or special characters.")
     }
@@ -70,7 +70,7 @@ struct CountryFormViewModelTests {
     @Test func nameWithHyphenOrApostropheIsAllowed() async {
         let viewModel = await makeViewModel()
         viewModel.name = "Anne-Marie O'Brien"
-        viewModel.submit()
+        _ = viewModel.submit()
 
         #expect(viewModel.nameError == nil)
     }
@@ -78,7 +78,7 @@ struct CountryFormViewModelTests {
     @Test func missingRegionAndCountryAreReported() async {
         let viewModel = await makeViewModel()
         viewModel.name = "Raven"
-        viewModel.submit()
+        _ = viewModel.submit()
 
         #expect(viewModel.regionError == "You must select a region.")
         #expect(viewModel.countryError == "You must select a country.")
@@ -87,9 +87,8 @@ struct CountryFormViewModelTests {
     @Test func submitDoesNothingWhileInvalid() async {
         let viewModel = await makeViewModel()
         viewModel.name = "Raven"
-        viewModel.submit()
 
-        #expect(viewModel.submitted == nil)
+        #expect(viewModel.submit() == nil)
     }
 
     @Test func validFormProducesASubmission() async {
@@ -98,13 +97,11 @@ struct CountryFormViewModelTests {
         viewModel.region = "Asia"
         viewModel.country = Country(name: "Japan", region: "Asia")
 
-        viewModel.submit()
+        let result = viewModel.submit()
 
-        #expect(viewModel.submitted == CountryFormViewModel.Submission(
-            name: "Raven",
-            region: "Asia",
-            country: "Japan"
-        ))
+        #expect(result?.name == "Raven")
+        #expect(result?.region == "Asia")
+        #expect(result?.country == "Japan")
     }
 
     @Test func clearResetsEverything() async {
@@ -112,14 +109,13 @@ struct CountryFormViewModelTests {
         viewModel.name = "Raven"
         viewModel.region = "Asia"
         viewModel.country = Country(name: "Japan", region: "Asia")
-        viewModel.submit()
+        _ = viewModel.submit()
 
         viewModel.clear()
 
         #expect(viewModel.name.isEmpty)
         #expect(viewModel.region == nil)
         #expect(viewModel.country == nil)
-        #expect(viewModel.submitted == nil)
         #expect(viewModel.nameError == nil)
     }
 }

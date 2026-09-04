@@ -19,9 +19,15 @@ struct FirstScreen: View {
     var body: some View {
         List {
             Section {
-                Text(viewModel.message)
-                    .font(Theme.Font.secondary)
-                    .foregroundStyle(Theme.Color.secondaryText)
+                VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
+                    Text(viewModel.greeting)
+                        .font(Theme.Font.sectionTitle)
+
+                    Text(viewModel.origin)
+                        .font(Theme.Font.body)
+                        .foregroundStyle(Theme.Color.secondaryText)
+                }
+                .padding(.vertical, Theme.Spacing.xs)
             }
 
             Button("Go to Second") {
@@ -32,7 +38,7 @@ struct FirstScreen: View {
                 path.removeLast()
             }
         }
-        .navigationTitle(viewModel.title)
+        .navigationTitle("First Screen")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
