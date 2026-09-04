@@ -19,12 +19,13 @@ struct PickerField<Item: Hashable>: View {
     var subtitle: ((Item) -> String)?
 
     var error: String?
+    var isRequired: Bool = false
     var isEnabled: Bool = true
 
     @State private var isPresented = false
 
     var body: some View {
-        FieldContainer(label: label, error: error) {
+        FieldContainer(label: label, isRequired: isRequired, error: error) {
             Button {
                 isPresented = true
             } label: {
@@ -40,6 +41,7 @@ struct PickerField<Item: Hashable>: View {
                         .font(.footnote)
                         .foregroundStyle(Theme.Color.secondaryText)
                 }
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .disabled(!isEnabled)
