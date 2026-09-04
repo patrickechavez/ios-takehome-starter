@@ -1,11 +1,11 @@
 //
 //  ErrorStateView.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 
-/// The "something went wrong" screen, with a retry button when one is given.
 struct ErrorStateView: View {
 
     let error: APIError

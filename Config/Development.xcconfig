@@ -1,46 +1,8 @@
-//
-//  Development.xcconfig
-//  TakeHomeStarter
-//
-
 #include "Shared.xcconfig"
-
-// "?" = optional, so a fresh clone still builds without it
 #include? "Secrets.xcconfig"
 
-// Identity — differs per environment so all three can install side by side
-
-// The app's unique ID on iOS
 PRODUCT_BUNDLE_IDENTIFIER = com.patrick.TakeHomeStarter.dev
-
-// Name under the Home Screen icon
 APP_DISPLAY_NAME = Development
-
-// Deep links: takehomestarter-dev://items/5
-
-// API
-
-// "//" is a comment here, so escape the double slash as /$()/
 API_BASE_URL = https:/$()/api.first.org/data/v1/
-
-// Short, so failures show up fast
 API_TIMEOUT_SECONDS = 20
-
-// Fail right away instead of hiding the error behind retries
-
-// Prints requests to the console; tokens are redacted
-
-// Force update — scaffolding, no code reads these yet
-
-// Where the Update button sends the user
-
-// Read by APIConfig, but nothing acts on it
-
-// Certificate pinning
-
-// Off so Charles/Proxyman can inspect traffic
-
-// Base64 SHA-256 of your server's public key
-
-// Enables #if DEVELOPMENT in Swift
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEVELOPMENT

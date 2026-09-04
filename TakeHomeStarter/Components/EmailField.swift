@@ -1,13 +1,12 @@
 //
 //  EmailField.swift
 //  TakeHomeStarter
-//  Created by John Patrick Echavez on 7/29/26.
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 import UIKit
 
-// Text field preset for email: email keyboard, no autocapitalization, autofill.
 struct EmailField: View {
 
     @Binding var text: String

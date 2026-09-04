@@ -1,7 +1,7 @@
 //
 //  Theme.swift
 //  TakeHomeStarter
-//  Created by John Patrick Echavez on 7/29/26.
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI

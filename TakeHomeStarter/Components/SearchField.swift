@@ -1,13 +1,11 @@
 //
 //  SearchField.swift
 //  TakeHomeStarter
-//  Created by John Patrick Echavez on 7/29/26.
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 
-// Standalone search box with a magnifier and a clear button.
-// For a search bar attached to a navigation bar, use SwiftUI's .searchable instead.
 struct SearchField: View {
 
     @Binding var text: String

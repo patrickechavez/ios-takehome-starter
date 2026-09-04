@@ -1,12 +1,11 @@
 //
 //  FieldContainer.swift
 //  TakeHomeStarter
-//  Created by John Patrick Echavez on 7/29/26.
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 
-// The label, box and error message every text field sits inside.
 struct FieldContainer<Content: View>: View {
     let label: String?
     var isRequired: Bool = false

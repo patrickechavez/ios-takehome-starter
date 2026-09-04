@@ -1,6 +1,7 @@
 //
 //  CountryFormViewModelTests.swift
-//  TakeHomeStarterTests
+//  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Testing
@@ -20,8 +21,6 @@ struct CountryFormViewModelTests {
         await viewModel.load()
         return viewModel
     }
-
-    // MARK: - Derived lists
 
     @Test func regionsAreUniqueAndSorted() async {
         let viewModel = await makeViewModel()
@@ -44,8 +43,6 @@ struct CountryFormViewModelTests {
 
         #expect(viewModel.country == nil)
     }
-
-    // MARK: - Validation
 
     @Test func noErrorsBeforeTheFirstSubmit() async {
         let viewModel = await makeViewModel()
@@ -87,8 +84,6 @@ struct CountryFormViewModelTests {
         #expect(viewModel.countryError == "You must select a country.")
     }
 
-    // MARK: - Submit and clear
-
     @Test func submitDoesNothingWhileInvalid() async {
         let viewModel = await makeViewModel()
         viewModel.name = "Raven"
@@ -128,8 +123,6 @@ struct CountryFormViewModelTests {
         #expect(viewModel.nameError == nil)
     }
 }
-
-// MARK: - Fake
 
 private struct FakeCountryRepository: CountryRepository {
 

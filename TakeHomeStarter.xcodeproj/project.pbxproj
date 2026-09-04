@@ -6,9 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		81883EABFDE7958411CAB122 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -28,21 +25,9 @@
 		E3BE7B85AF8DF2CB1ABCADB2 /* TakeHomeStarterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TakeHomeStarterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2DFCD243302F3B0C006F0921 /* Exceptions for "TakeHomeStarter" folder in "TakeHomeStarter" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-			);
-			target = 2D1CA87B301A21BA00C6EFD2 /* TakeHomeStarter */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D1CA87E301A21BA00C6EFD2 /* TakeHomeStarter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2DFCD243302F3B0C006F0921 /* Exceptions for "TakeHomeStarter" folder in "TakeHomeStarter" target */,
-			);
 			path = TakeHomeStarter;
 			sourceTree = "<group>";
 		};
@@ -204,9 +189,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D1CA878301A21BA00C6EFD2 /* Sources */ = {
@@ -612,12 +594,6 @@
 			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D1CA874301A21BA00C6EFD2 /* Project object */;
 }

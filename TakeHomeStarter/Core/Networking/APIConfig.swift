@@ -1,15 +1,11 @@
 //
 //  APIConfig.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
 
-/// Reads the values set in `Config/<Environment>.xcconfig`, which reach the app
-/// through `Config/Info.plist`.
-///
-/// To point at a different API, change `API_BASE_URL` in the xcconfig files —
-/// not here.
 enum APIConfig {
 
     static let baseURL: URL = {

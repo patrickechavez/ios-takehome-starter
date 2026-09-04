@@ -1,48 +1,8 @@
-//
-//  Production.xcconfig
-//  TakeHomeStarter
-//
-//  The only configuration real users run.
-//
-
 #include "Shared.xcconfig"
-
-// "?" = optional, so a fresh clone still builds without it
 #include? "Secrets.xcconfig"
 
-// Identity — differs per environment so all three can install side by side
-
-// Changing this after release makes a NEW app, not an update
 PRODUCT_BUNDLE_IDENTIFIER = com.patrick.TakeHomeStarter
-
-// Name under the Home Screen icon
 APP_DISPLAY_NAME = TakeHomeStarter
-
-// Deep links: takehomestarter://items/5
-
-// API
-
-// "//" is a comment here, so escape the double slash as /$()/
 API_BASE_URL = https:/$()/api.first.org/data/v1/
-
-// Seconds before a request gives up
 API_TIMEOUT_SECONDS = 30
-
-// Retries for flaky mobile connections
-
-// Must stay NO — logs leak user data to the device console
-
-// Force update — scaffolding, no code reads these yet
-
-// Replace id000000000 with your real App Store ID before shipping
-
-// Read by APIConfig, but nothing acts on it
-
-// Certificate pinning
-
-// YES with an empty list below would claim pinning but do none
-
-// List two (current + next) so you can rotate keys without an app update
-
-// Enables #if PRODUCTION in Swift
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) PRODUCTION

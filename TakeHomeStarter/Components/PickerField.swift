@@ -1,23 +1,11 @@
 //
 //  PickerField.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 
-/// A form field that opens a searchable list to pick one item.
-///
-/// Works with any Hashable type — plain strings, structs, enums:
-///
-///     PickerField(label: "Region", items: regions,
-///                 selection: $region, title: { $0 })
-///
-///     PickerField(label: "Country", items: countries,
-///                 selection: $country, title: \.name, subtitle: \.capital,
-///                 isEnabled: region != nil)
-///
-/// A sheet is used instead of an inline dropdown so it stays usable with
-/// hundreds or thousands of items.
 struct PickerField<Item: Hashable>: View {
 
     let label: String
@@ -26,10 +14,8 @@ struct PickerField<Item: Hashable>: View {
     let items: [Item]
     @Binding var selection: Item?
 
-    /// Shown in each row, and what the search field matches against.
     let title: (Item) -> String
 
-    /// Optional second line in each row.
     var subtitle: ((Item) -> String)?
 
     var error: String?
@@ -71,8 +57,6 @@ struct PickerField<Item: Hashable>: View {
     }
 }
 
-/// The list behind `PickerField`. Usable on its own wherever you need
-/// "pick one from a list, with search".
 struct SelectionSheet<Item: Hashable>: View {
 
     let title: String

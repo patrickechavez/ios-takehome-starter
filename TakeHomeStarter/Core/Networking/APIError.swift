@@ -1,6 +1,7 @@
 //
 //  APIError.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
@@ -13,7 +14,6 @@ enum APIError: LocalizedError, Equatable {
     case invalidResponse
     case decodingFailed(detail: String)
 
-    /// Any non-2xx response. `message` is the server's text, when it sent one.
     case http(status: Int, message: String?)
 
     var errorDescription: String? {
@@ -33,13 +33,10 @@ enum APIError: LocalizedError, Equatable {
         }
     }
 
-    /// Cancellation is a normal part of SwiftUI's lifecycle — a view going away
-    /// mid-request is not something to show the user.
     var isUserFacing: Bool {
         self != .cancelled
     }
 
-    /// Turns anything thrown into an APIError. One funnel for every catch block.
     static func classify(_ error: any Error) -> APIError {
         if let apiError = error as? APIError { return apiError }
         if error is CancellationError { return .cancelled }

@@ -1,11 +1,11 @@
 //
 //  APIClient.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
 
-/// A protocol so tests and previews can swap in a fake.
 protocol APIClient: Sendable {
     func get<T: Decodable & Sendable>(_ path: String, query: [URLQueryItem]) async throws -> T
 }

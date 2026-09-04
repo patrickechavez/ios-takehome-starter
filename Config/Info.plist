@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Values come from Config/<Environment>.xcconfig via $(...) substitution.
-	     Every value must be <string> — APIConfig reads them as String first,
-	     then parses. An <integer> or <true/> here would read back as nil. -->
-
 	<key>API_BASE_URL</key>
 	<string>$(API_BASE_URL)</string>
 
