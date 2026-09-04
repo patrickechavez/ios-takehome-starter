@@ -15,13 +15,13 @@
 
 set -euo pipefail
 
-readonly OLD_NAME="AppTemplate"
-readonly OLD_DISPLAY="App Template"
+readonly OLD_NAME="TakeHomeStarter"
+readonly OLD_DISPLAY="Take Home Starter"
 readonly OLD_PREFIX="com.patrick"
 
 # The deep link scheme is lowercase, so it needs its own substitution — two
 # apps sharing `apptemplate://` would fight over every incoming link.
-readonly OLD_SCHEME="apptemplate"
+readonly OLD_SCHEME="takehomestarter"
 
 usage() {
     cat <<'EOF'
