@@ -51,34 +51,3 @@ struct InlineErrorText: View {
             .accessibilityAddTraits(.isStaticText)
     }
 }
-
-struct AsyncButton: View {
-
-    let title: Text
-    let isRunning: Bool
-    let action: @Sendable () async -> Void
-
-    var role: ButtonRole?
-
-    var body: some View {
-        Button(role: role) {
-            Task { await action() }
-        } label: {
-
-            ZStack {
-                title.opacity(isRunning ? 0 : 1)
-                if isRunning {
-                    ProgressView()
-                        .tint(.white)
-                        .controlSize(.regular)
-                }
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .disabled(isRunning)
-        .animation(Theme.Animation.content, value: isRunning)
-        .accessibilityAddTraits(isRunning ? .updatesFrequently : [])
-    }
-}
