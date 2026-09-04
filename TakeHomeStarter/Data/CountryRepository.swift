@@ -1,32 +1,10 @@
 //
-//  Country.swift
+//  CountryRepository.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
-
-struct Country: Hashable, Sendable {
-    let name: String
-    let region: String
-}
-
-// MARK: - API shape
-//
-// https://api.first.org/data/v1/countries?limit=300 returns countries keyed by
-// ISO code, so the response is a dictionary rather than an array:
-//
-//     { "data": { "DZ": { "country": "Algeria", "region": "Africa" }, ... } }
-
-private struct CountriesResponse: Decodable {
-    let data: [String: Entry]
-
-    struct Entry: Decodable {
-        let country: String
-        let region: String?
-    }
-}
-
-// MARK: - Repository
 
 protocol CountryRepository: Sendable {
     func countries() async throws -> [Country]
