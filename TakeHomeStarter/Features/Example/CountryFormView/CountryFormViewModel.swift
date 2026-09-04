@@ -1,6 +1,7 @@
 //
 //  CountryFormViewModel.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
@@ -16,7 +17,6 @@ final class CountryFormViewModel: LoadableViewModel {
     var region: String?
     var country: Country?
 
-    /// Set on submit so the view can push the result screen.
     private(set) var submitted: Submission?
 
     struct Submission: Hashable {
@@ -25,8 +25,6 @@ final class CountryFormViewModel: LoadableViewModel {
         let country: String
     }
 
-    /// Errors only appear once the user has tried to submit, so the form
-    /// doesn't shout at them while they're still filling it in.
     private var didAttemptSubmit = false
 
     @ObservationIgnored private let repository: any CountryRepository
@@ -35,21 +33,15 @@ final class CountryFormViewModel: LoadableViewModel {
         self.repository = repository
     }
 
-    // MARK: - Derived lists
-
-    /// Unique regions, alphabetical.
     var regions: [String] {
         guard let countries = state.value else { return [] }
         return Set(countries.map(\.region)).sorted()
     }
 
-    /// Countries in the chosen region, alphabetical.
     var countriesInRegion: [Country] {
         guard let countries = state.value, let region else { return [] }
         return countries.filter { $0.region == region }
     }
-
-    // MARK: - Validation
 
     var nameError: String? {
         guard didAttemptSubmit else { return nil }
@@ -79,8 +71,6 @@ final class CountryFormViewModel: LoadableViewModel {
             && !name.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    // MARK: - Actions
-
     func load() async {
         await perform { [repository] in
             try await repository.countries()
@@ -107,7 +97,6 @@ final class CountryFormViewModel: LoadableViewModel {
         didAttemptSubmit = false
     }
 
-    /// Picking a new region invalidates the country chosen under the old one.
     func regionChanged() {
         country = nil
     }

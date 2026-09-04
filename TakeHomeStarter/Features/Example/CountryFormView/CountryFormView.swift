@@ -1,6 +1,7 @@
 //
 //  CountryFormView.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
@@ -8,9 +9,11 @@ import SwiftUI
 struct CountryFormView: View {
 
     @State private var viewModel: CountryFormViewModel
+    @Binding var path: [Route]
 
-    init(viewModel: CountryFormViewModel) {
+    init(viewModel: CountryFormViewModel, path: Binding<[Route]>) {
         _viewModel = State(wrappedValue: viewModel)
+        _path = path
     }
 
     var body: some View {
@@ -33,8 +36,9 @@ struct CountryFormView: View {
             guard viewModel.state.needsLoad else { return }
             await viewModel.load()
         }
-        .navigationDestination(item: submissionBinding) { submission in
-            ResultView(submission: submission)
+        .onChange(of: viewModel.submitted) { _, submission in
+            guard submission != nil else { return }
+            path.append(.first)
         }
     }
 
@@ -73,13 +77,19 @@ struct CountryFormView: View {
                 )
 
                 HStack(spacing: Theme.Spacing.md) {
-                    Button("Submit") { viewModel.submit() }
-                        .buttonStyle(.borderedProminent)
-                        .frame(maxWidth: .infinity)
+                    Button {
+                        viewModel.submit()
+                    } label: {
+                        Text("Submit").frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
 
-                    Button("Clear") { viewModel.clear() }
-                        .buttonStyle(.bordered)
-                        .frame(maxWidth: .infinity)
+                    Button {
+                        viewModel.clear()
+                    } label: {
+                        Text("Clear").frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
                 }
                 .controlSize(.large)
                 .padding(.top, Theme.Spacing.md)
@@ -87,14 +97,5 @@ struct CountryFormView: View {
             .padding(Theme.Spacing.lg)
         }
         .scrollDismissesKeyboard(.interactively)
-    }
-
-    /// `navigationDestination(item:)` needs a two-way binding, but `submitted`
-    /// is read-only from outside — setting it to nil just pops back.
-    private var submissionBinding: Binding<CountryFormViewModel.Submission?> {
-        Binding(
-            get: { viewModel.submitted },
-            set: { if $0 == nil { viewModel.clear() } }
-        )
     }
 }

@@ -1,12 +1,11 @@
 //
 //  AppDependencies.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import Foundation
 
-/// Everything the app needs, built in one place. Views get view models from
-/// here, so tests and previews can hand in a fake API client instead.
 @MainActor
 final class AppDependencies {
 
@@ -18,5 +17,13 @@ final class AppDependencies {
 
     func makeCountryFormViewModel() -> CountryFormViewModel {
         CountryFormViewModel(repository: LiveCountryRepository(api: api))
+    }
+
+    func makeFirstScreenViewModel() -> FirstScreenViewModel {
+        FirstScreenViewModel()
+    }
+
+    func makeSecondScreenViewModel() -> SecondScreenViewModel {
+        SecondScreenViewModel()
     }
 }

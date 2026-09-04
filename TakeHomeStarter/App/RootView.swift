@@ -1,19 +1,38 @@
 //
 //  RootView.swift
 //  TakeHomeStarter
+//  Created by John Patrick Echavez
 //
 
 import SwiftUI
 
-/// Point this at whatever the assessment asks for. The example below is a
-/// worked reference — delete `Features/Example` once you have your own screen.
 struct RootView: View {
 
     let dependencies: AppDependencies
 
+    @State private var path: [Route] = []
+
     var body: some View {
-        NavigationStack {
-            CountryFormView(viewModel: dependencies.makeCountryFormViewModel())
+        NavigationStack(path: $path) {
+            CountryFormView(
+                viewModel: dependencies.makeCountryFormViewModel(),
+                path: $path
+            )
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .first:
+                    FirstScreen(
+                        viewModel: dependencies.makeFirstScreenViewModel(),
+                        path: $path
+                    )
+
+                case .second:
+                    SecondScreen(
+                        viewModel: dependencies.makeSecondScreenViewModel(),
+                        path: $path
+                    )
+                }
+            }
         }
     }
 }
