@@ -12,9 +12,16 @@ scope judgement, however good the code is.
 ```bash
 git clone <this repo> TakeHomeAcme
 cd TakeHomeAcme
-rm -rf .git && git init          # fresh history, starts at the assessment
-Scripts/rename.sh TakeHomeAcme com.yourname
+
+Scripts/rename.sh TakeHomeAcme com.yourname    # rename first — it needs a clean git tree
+
+rm -rf .git && git init                        # then fresh history, starting at the assessment
+git add -A && git commit -m "Initial commit"
 ```
+
+**Order matters.** `rename.sh` requires a clean working tree and uses `git mv`,
+so it has to run on the freshly cloned repo, before you reset the history.
+Reset first and it fails with "working tree has uncommitted changes".
 
 Then:
 
