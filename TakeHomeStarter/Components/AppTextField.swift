@@ -34,20 +34,3 @@ struct AppTextField: View {
         }
     }
 }
-
-struct InlineErrorText: View {
-
-    private let message: String
-
-    init(_ message: String) {
-        self.message = message
-    }
-
-    var body: some View {
-        Label(message, systemImage: "exclamationmark.triangle.fill")
-            .font(Theme.Font.secondary)
-            .foregroundStyle(Theme.Color.danger)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .accessibilityAddTraits(.isStaticText)
-    }
-}
